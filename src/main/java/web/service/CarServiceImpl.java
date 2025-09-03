@@ -15,13 +15,14 @@ public class CarServiceImpl implements CarService {
     @Autowired
     public void setCarDao(CarDao carDao) {this.carDao = carDao;}
 
+    @Override
     public List<Car> getCars(int count) {
         if (count >= 5) {
             return carDao.getAllCars();
         }
         return carDao.getCars(count);
     }
-
+    @Override
     public List<Car> getAllCars() {
         return carDao.getAllCars();
     }
