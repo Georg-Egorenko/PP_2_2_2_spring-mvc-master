@@ -5,26 +5,26 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import web.service.CarServiceImpl;
+import web.service.CarService;
 
 @Controller
 @RequestMapping("/cars")
 public class CarController {
 
-    private final CarServiceImpl carServiceImpl;
+    private final CarService carService;
 
-    public CarController(CarServiceImpl carServiceImpl) {
-        this.carServiceImpl = carServiceImpl;
+    public CarController(CarService carService) {
+        this.carService = carService;
     }
 
     @GetMapping
     public String getAllCars(Model model) {
-        model.addAttribute("cars", carServiceImpl.getAllCars());
+        model.addAttribute("cars", carService.getAllCars());
         return "cars";
     }
-    @GetMapping
+    @GetMapping(params = "count")
     public String getCarsByCount (@RequestParam("count") int count, Model model) {
-        model.addAttribute("cars", carServiceImpl.getCars(count));
+        model.addAttribute("cars", carService.getCars(count));
         return "cars";
     }
 }
